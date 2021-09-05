@@ -1,21 +1,22 @@
 const mongoose = require('mongoose');
 
 const MemorySchema = mongoose.Schema({
-    title:String,
+    title: String,
     desc: String,
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'users'
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
     },
-    meter:{
-        type:Number,
-        min:1,
-        max:10
+    meter: {
+        type: Number,
+        min: 1,
+        max: 10
     },
-    date:{
-        type:Date,
-        default:Date.now
-    }
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    photos: Object
 });
 
-module.exports = mongoose.model('Memory',MemorySchema);
+module.exports = mongoose.model('Memory', MemorySchema);
