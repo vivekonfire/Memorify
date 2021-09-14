@@ -7,6 +7,14 @@ module.exports = {
                 background: "#eeefef",
                 navbar: "#4BAFE8",
             },
+            height: {
+                100: "28rem",
+                101: "32rem",
+            },
+            width: {
+                100: "28rem",
+                101: "32rem",
+            },
         },
     },
     variants: {
