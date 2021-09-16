@@ -31,7 +31,7 @@ const MemoryReducer = (state, action) => {
                 ...state,
                 filter: state.memories.filter((memo) => {
                     const regex = new RegExp(`${action.payload}`, "gi");
-                    return memo.name.match(regex) || memo.email.match(regex);
+                    return memo.title.match(regex);
                 }),
             };
         case CLEAR_FILTER:

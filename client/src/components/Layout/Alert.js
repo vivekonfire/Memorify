@@ -10,7 +10,7 @@ const Alert = () => {
         error.length > 0 &&
         error.map((err) => (
             <div
-                className="h-16 w-full flex justify-center bg-background border-2 border-black absolute inset-0 top-20 "
+                className="h-16 w-full flex justify-center bg-red-300 border-2 border-black absolute top-20 "
                 key={err.id}
             >
                 <i className="fas fa-info-circle my-auto px-4 fa-x" />{" "}

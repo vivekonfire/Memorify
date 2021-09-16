@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import setAuthToken from "./utils/setAuthToken";
 
 import Navbar from "./components/Layout/Navbar";
-import Login from "./components/pages/Login";
-import SignUp from "./components/pages/SignUp";
+import Login from "./components/Pages/Login";
+import SignUp from "./components/Pages/SignUp";
 import Alert from "./components/Layout/Alert";
-import Home from "./components/pages/Home";
+import Home from "./components/Pages/Home";
 
 import AuthState from "./Context/AuthContext/AuthState";
 import AlertState from "./Context/AlertContext/AlertState";
