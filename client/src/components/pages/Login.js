@@ -1,14 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
 import authContext from "../../Context/AuthContext/authcontext";
+import alertContext from "../../Context/AlertContext/alertContext";
 
 const Login = (props) => {
     const AuthContext = useContext(authContext);
+    const AlertContext = useContext(alertContext);
 
-    const { login, isAuth } = AuthContext;
+    const { login, isAuth, error, clearErrors } = AuthContext;
+    const { setAlert } = AlertContext;
 
     useEffect(() => {
-        if (isAuth) props.history.push("/");
-    }, [isAuth, props.history]);
+        if (isAuth) {
+            props.history.push("/");
+        }
+
+        if (error !== null) {
+            setAlert(error);
+            clearErrors();
+        }
+
+        //eslint-disable-next-line
+    }, [isAuth, props.history, error]);
 
     const [person, setPerson] = useState({
         email: "",
@@ -19,7 +31,10 @@ const Login = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        login(person);
+
+        if (email === "" || password === "")
+            setAlert("Please fill all the fields");
+        else login(person);
     };
 
     const onChange = (e) => {

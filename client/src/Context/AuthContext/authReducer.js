@@ -5,6 +5,8 @@ import {
     REGISTER_SUCCESS,
     LOAD_USER,
     AUTH_ERROR,
+    LOGOUT,
+    CLEAR_ERRORS,
 } from "../types";
 
 const authReducer = (state, action) => {
@@ -27,6 +29,7 @@ const authReducer = (state, action) => {
         case LOGIN_FAIL:
         case REGISTER_FAIL:
         case AUTH_ERROR:
+        case LOGOUT:
             return {
                 ...state,
                 loading: false,
@@ -34,6 +37,11 @@ const authReducer = (state, action) => {
                 error: action.payload,
                 token: null,
                 user: null,
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
             };
         default:
             return state;

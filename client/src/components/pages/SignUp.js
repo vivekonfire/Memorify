@@ -1,16 +1,26 @@
 import React, { useState, useContext, useEffect } from "react";
 import authContext from "../../Context/AuthContext/authcontext";
+import alertContext from "../../Context/AlertContext/alertContext";
 
 const SignUp = (props) => {
     const AuthContext = useContext(authContext);
+    const AlertContext = useContext(alertContext);
 
-    const { register, isAuth } = AuthContext;
+    const { register, isAuth, error, clearErrors } = AuthContext;
+    const { setAlert } = AlertContext;
 
     useEffect(() => {
         if (isAuth) {
             props.history.push("/");
         }
-    }, [isAuth, props.history]);
+
+        if (error !== null) {
+            setAlert(error);
+            clearErrors();
+        }
+
+        //eslint-disable-next-line
+    }, [isAuth, props.history, error]);
 
     const [person, setPerson] = useState({
         name: "",
@@ -22,7 +32,10 @@ const SignUp = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        register(person);
+
+        if (name === "" || password === "" || email === "")
+            setAlert("Please fill all Credentials");
+        else register(person);
     };
 
     const onChange = (e) => {

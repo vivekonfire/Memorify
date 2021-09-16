@@ -8,7 +8,7 @@ const multer = require("multer");
 route.get("/", auth, async (req, res) => {
     try {
         const memories = await Memory.find({
-            user: req.id,
+            user: req._id,
         }).sort({
             date: -1,
         });
@@ -28,7 +28,7 @@ route.get("/:id", auth, async (req, res) => {
                 msg: "Not Found",
             });
         }
-        if (memory.user.toString() !== req.id) {
+        if (memory._id.toString() !== req.params.id) {
             return res.status(401).json({
                 msg: "Not authorized",
             });
@@ -58,10 +58,10 @@ route.post(
     "/",
     [
         auth,
-        [
-            body("title", "Please enter the title").not().isEmpty(),
-            body("desc", "Please enter the Description").not().isEmpty(),
-        ],
+        // [
+        //     body("title", "Please enter the title").not().isEmpty(),
+        //     body("desc", "Please enter the Description").not().isEmpty(),
+        // ],
     ],
     upload.array("photos", 10),
     async (req, res) => {
@@ -110,7 +110,7 @@ route.put("/:id", auth, async (req, res) => {
                 msg: "Not Found",
             });
         }
-        if (memory.user.toString() !== req.id) {
+        if (memory._id.toString() !== req.params.id) {
             return res.status(401).json({
                 msg: "Not authorized",
             });
@@ -143,7 +143,7 @@ route.delete("/:id", auth, async (req, res) => {
             });
         }
 
-        if (req.id !== memory.user.toString()) {
+        if (memory._id.toString() !== req.params.id) {
             return res.status(401).json({
                 msg: "Not authorized",
             });
