@@ -1,11 +1,14 @@
 const express = require("express");
 const connectDB = require("./config/db");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 
 connectDB();
 
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended: false, limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(fileUpload({ useTempFiles: true }));
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));

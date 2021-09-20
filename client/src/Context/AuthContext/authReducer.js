@@ -29,12 +29,20 @@ const authReducer = (state, action) => {
         case LOGIN_FAIL:
         case REGISTER_FAIL:
         case AUTH_ERROR:
-        case LOGOUT:
             return {
                 ...state,
                 loading: false,
                 isAuth: false,
                 error: action.payload,
+                token: null,
+                user: null,
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                loading: false,
+                isAuth: false,
+                error: null,
                 token: null,
                 user: null,
             };

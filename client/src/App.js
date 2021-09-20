@@ -7,6 +7,7 @@ import Login from "./components/Pages/Login";
 import SignUp from "./components/Pages/SignUp";
 import Alert from "./components/Layout/Alert";
 import Home from "./components/Pages/Home";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 import AuthState from "./Context/AuthContext/AuthState";
 import AlertState from "./Context/AlertContext/AlertState";
@@ -30,7 +31,7 @@ const App = () => {
                                     path="/register"
                                     component={SignUp}
                                 />
-                                <Route exact path="/" component={Home} />
+                                <PrivateRoute exact path="/" component={Home} />
                             </Switch>
                             <Alert />
                             <Navbar />

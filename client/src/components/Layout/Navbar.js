@@ -1,11 +1,14 @@
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import authContext from "../../Context/AuthContext/authcontext";
+import MemoryContext from "../../Context/MemoryContext/memoryContext";
 
 const Navbar = () => {
     const AuthContext = useContext(authContext);
+    const { isAuth, logout } = AuthContext;
 
-    const { isAuth, logout, clearMemories } = AuthContext;
+    const memoryContext = useContext(MemoryContext);
+    const { clearMemories } = memoryContext;
 
     const onLogout = () => {
         logout();

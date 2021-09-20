@@ -3,7 +3,8 @@ const Memory = require("../models/Memory");
 const route = express.Router();
 const auth = require("../middleware/auth");
 const { body, validationResult } = require("express-validator");
-const multer = require("multer");
+const { cloudinary } = require("../config/cloudinary");
+const fs = require("fs");
 
 route.get("/", auth, async (req, res) => {
     try {
@@ -41,29 +42,15 @@ route.get("/:id", auth, async (req, res) => {
     }
 });
 
-const fileStorageEngine = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "./images");
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "--" + file.originalname);
-    },
-});
-
-const upload = multer({
-    storage: fileStorageEngine,
-});
-
 route.post(
     "/",
     [
         auth,
-        // [
-        //     body("title", "Please enter the title").not().isEmpty(),
-        //     body("desc", "Please enter the Description").not().isEmpty(),
-        // ],
+        [
+            body("title", "Please enter the title").not().isEmpty(),
+            body("desc", "Please enter the Description").not().isEmpty(),
+        ],
     ],
-    upload.array("photos", 10),
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -71,17 +58,23 @@ route.post(
                 errors: errors.array(),
             });
         }
-
-        const photos = req.files;
-
+        const file = req.files.photo;
         const { title, desc, meter } = req.body;
+        var photo = {};
+        try {
+            photo = await cloudinary.uploader.upload(file.tempFilePath, {
+                upload_preset: "ml_default",
+            });
+        } catch (error) {
+            res.status(500).send(error);
+        }
 
         try {
             let memory = new Memory({
                 title,
                 desc,
                 meter,
-                photos,
+                photo,
                 user: req.id,
             });
 
