@@ -6,11 +6,11 @@ const Login = (props) => {
     const AuthContext = useContext(authContext);
     const AlertContext = useContext(alertContext);
 
-    const { login, isAuth, error, clearErrors } = AuthContext;
+    const { login, token, error, clearErrors } = AuthContext;
     const { setAlert } = AlertContext;
 
     useEffect(() => {
-        if (isAuth) {
+        if (token !== null) {
             props.history.push("/");
         }
 
@@ -20,7 +20,7 @@ const Login = (props) => {
         }
 
         //eslint-disable-next-line
-    }, [isAuth, props.history, error]);
+    }, [token, props.history, error]);
 
     const [person, setPerson] = useState({
         email: "",

@@ -46,7 +46,7 @@ const MemoryState = (props) => {
 
     const deleteMemory = async (id) => {
         try {
-            await axios.get(`/api/memo/${id}`);
+            await axios.delete(`/api/memo/${id}`);
             getMemories();
         } catch (err) {
             dispatch({ type: ERROR_MEMORIES, payload: err.response.data.msg });

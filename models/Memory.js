@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const MemorySchema = mongoose.Schema({
     User: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "User",
     },
     title: String,
     desc: String,

@@ -6,6 +6,7 @@ module.exports = {
             colors: {
                 background: "#eeefef",
                 navbar: "#4BAFE8",
+                memory_box: "#C3BEF0",
             },
             height: {
                 100: "28rem",

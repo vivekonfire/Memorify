@@ -58,11 +58,10 @@ route.post(
                 errors: errors.array(),
             });
         }
-        const file = req.files.photo;
-        const { title, desc, meter } = req.body;
+        const { title, desc, meter, pic } = req.body;
         var photo = {};
         try {
-            photo = await cloudinary.uploader.upload(file.tempFilePath, {
+            photo = await cloudinary.uploader.upload(pic, {
                 upload_preset: "ml_default",
             });
         } catch (error) {
@@ -75,9 +74,9 @@ route.post(
                 desc,
                 meter,
                 photo,
-                user: req.id,
+                user: req.user,
             });
-
+            console.log({ memory });
             await memory.save();
             res.json(memory);
         } catch (err) {
@@ -88,10 +87,11 @@ route.post(
 );
 
 route.put("/:id", auth, async (req, res) => {
-    const { title, desc, meter } = req.body;
+    const { title, desc, meter, photo } = req.body;
 
     const newFields = {};
     if (title) newFields.title = title;
+    if (photo) newFields.photo = photo;
     if (desc) newFields.desc = desc;
     if (meter) newFields.meter = meter;
 

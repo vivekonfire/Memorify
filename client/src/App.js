@@ -7,6 +7,9 @@ import Login from "./components/Pages/Login";
 import SignUp from "./components/Pages/SignUp";
 import Alert from "./components/Layout/Alert";
 import Home from "./components/Pages/Home";
+import New from "./components/Pages/New";
+import View from "./components/Pages/View";
+import Update from "./components/Pages/Update";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 import AuthState from "./Context/AuthContext/AuthState";
@@ -32,6 +35,21 @@ const App = () => {
                                     component={SignUp}
                                 />
                                 <PrivateRoute exact path="/" component={Home} />
+                                <PrivateRoute
+                                    exact
+                                    path="/new"
+                                    component={New}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/view/:id"
+                                    component={View}
+                                />
+                                <PrivateRoute
+                                    exact
+                                    path="/update/:id"
+                                    component={Update}
+                                />
                             </Switch>
                             <Alert />
                             <Navbar />
