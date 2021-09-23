@@ -61,7 +61,7 @@ const MemoryState = (props) => {
         };
 
         try {
-            await axios.put(`/api/memo/${memory._id}`, memory, config);
+            await axios.put(`/api/memo/${memory.id}`, memory, config);
             getMemories();
         } catch (err) {
             dispatch({ type: ERROR_MEMORIES, payload: err.response.data.msg });

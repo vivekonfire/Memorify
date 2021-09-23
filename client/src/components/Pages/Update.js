@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import MemoryContext from "../../Context/MemoryContext/memoryContext";
-import AlertContext from "../../Context/AlertContext/alertContext";
 
-const Update = ({ match }) => {
+const Update = ({ match, history }) => {
     const memoryContext = useContext(MemoryContext);
     const {
         setCurrent,
@@ -15,19 +13,17 @@ const Update = ({ match }) => {
         updateMemory,
     } = memoryContext;
 
-    const alertContext = useContext(AlertContext);
-    const { setAlert } = alertContext;
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState("");
+    const [pic, setPic] = useState("");
 
     useEffect(() => {
         getMemory(match.params.id);
-        console.log(memory);
         setCurrent(memory);
+        setTitle(current.title);
+        setDesc(current.desc);
         //eslint-disable-next-line
-    }, []);
-
-    const [title, setTitle] = useState(current.title);
-    const [desc, setDesc] = useState(current.desc);
-    const [pic, setPic] = useState(current.photo);
+    }, [current]);
 
     const onChange = (e) => {
         if (e.target.name === "title") setTitle(e.target.value);
@@ -44,12 +40,10 @@ const Update = ({ match }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (title === "" || desc === "" || pic == null)
-            setAlert("Please enter everything");
-        else {
-            updateMemory({ title, desc, pic });
-            clearCurrent();
-        }
+
+        updateMemory({ id: current._id, title, desc, pic });
+        clearCurrent();
+        history.push("/");
     };
 
     return (
@@ -88,7 +82,7 @@ const Update = ({ match }) => {
                         className="text-center bg-navbar rounded-lg px-6 py-4"
                         type="submit"
                     >
-                        <Link to="/">Submit</Link>
+                        Update
                     </button>
                 </div>
             </form>

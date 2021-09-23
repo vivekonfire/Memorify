@@ -9,7 +9,7 @@ const fs = require("fs");
 route.get("/", auth, async (req, res) => {
     try {
         const memories = await Memory.find({
-            user: req._id,
+            user: req.user.id,
         }).sort({
             date: -1,
         });
@@ -74,9 +74,8 @@ route.post(
                 desc,
                 meter,
                 photo,
-                user: req.user,
+                user: req.user.id,
             });
-            console.log({ memory });
             await memory.save();
             res.json(memory);
         } catch (err) {
@@ -87,13 +86,22 @@ route.post(
 );
 
 route.put("/:id", auth, async (req, res) => {
-    const { title, desc, meter, photo } = req.body;
+    const { title, desc, meter, pic } = req.body;
 
     const newFields = {};
     if (title) newFields.title = title;
-    if (photo) newFields.photo = photo;
     if (desc) newFields.desc = desc;
     if (meter) newFields.meter = meter;
+
+    var photo = {};
+    try {
+        photo = await cloudinary.uploader.upload(pic, {
+            upload_preset: "ml_default",
+        });
+    } catch (error) {
+        res.status(500).send(error);
+    }
+    if (pic) newFields.photo = photo;
 
     try {
         let memory = await Memory.findById(req.params.id);

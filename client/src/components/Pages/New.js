@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 
 import MemoryContext from "../../Context/MemoryContext/memoryContext";
 import AlertContext from "../../Context/AlertContext/alertContext";
@@ -34,6 +33,7 @@ const New = (props) => {
             setAlert("Please enter everything");
         else {
             addMemory({ title, desc, pic });
+            props.history.push("/");
         }
     };
 
@@ -70,10 +70,10 @@ const New = (props) => {
                 </div>
                 <div className="flex justify-center">
                     <button
-                        className="text-center bg-navbar rounded-lg px-6 py-4"
+                        className="text-center bg-navbar rounded-lg px-6 py-4 "
                         type="submit"
                     >
-                        <Link to="/">Submit</Link>
+                        Submit
                     </button>
                 </div>
             </form>
