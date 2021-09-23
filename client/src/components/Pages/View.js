@@ -15,7 +15,6 @@ const View = ({ match }) => {
     const { photo, title, desc } = memory;
 
     const onClick = () => {
-        console.log("asdff");
         deleteMemory(match.params.id);
     };
 

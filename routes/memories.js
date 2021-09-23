@@ -117,6 +117,8 @@ route.put("/:id", auth, async (req, res) => {
             });
         }
 
+        await cloudinary.uploader.destroy(memory.photo.public_id);
+
         memory = await Memory.findByIdAndUpdate(
             req.params.id,
             {
@@ -149,6 +151,8 @@ route.delete("/:id", auth, async (req, res) => {
                 msg: "Not authorized",
             });
         }
+
+        await cloudinary.uploader.destroy(memory.photo.public_id);
 
         await Memory.findByIdAndRemove(req.params.id);
 
