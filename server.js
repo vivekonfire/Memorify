@@ -16,4 +16,8 @@ app.use("/api/memo", require("./routes/memories"));
 
 const PORT = process.env.PORT || 5000;
 
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
+
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));
