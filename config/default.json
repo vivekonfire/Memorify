@@ -1,4 +1,0 @@
-{
-    "jwtSecret":"onfire",
-    "mongoURI":"mongodb+srv://vivekonfire:Vvkmatali18..@cluster0.jkb3a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-}
