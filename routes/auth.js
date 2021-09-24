@@ -5,7 +5,6 @@ const User = require("../models/User");
 const auth = require("../middleware/auth");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("config");
 
 route.get("/", auth, async (req, res) => {
     try {
