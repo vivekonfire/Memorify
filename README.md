@@ -34,7 +34,29 @@ Memorify is a place where you can store you memories in todays date people tend 
 
 ## Screenshots
 
-![login page](./screenshots/pic1.png)
+#### Login Page
+
+![Login page](./screenshots/pic1.png)
+
+#### Register Page
+
+![Register page](./screenshots/pic2.png)
+
+#### Home Page
+
+![Home page](./screenshots/pic3.png)
+
+#### Searhed Results
+
+![Seached results](./screenshots/pic4.png)
+
+#### View Page
+
+![View page](./screenshots/pic5.png)
+
+#### Add new memory
+
+![New page](./screenshots/pic6.png)
 
 ## To Run
 
