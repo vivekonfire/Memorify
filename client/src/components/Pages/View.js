@@ -35,7 +35,11 @@ const View = ({ match }) => {
             </div>
             <div className="flex ring-4 ring-black rounded-lg mx-4">
                 {photo !== undefined ? (
-                    <img src={photo.url} alt="pic" className="h-96 p-4" />
+                    <img
+                        src={photo.secure_url}
+                        alt="pic"
+                        className="h-96 p-4"
+                    />
                 ) : (
                     <img src={NoImage} alt="pic" className="w-1/6 p-4" />
                 )}

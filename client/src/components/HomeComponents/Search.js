@@ -1,13 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import MemoryContext from "../../Context/MemoryContext/memoryContext";
-import AlertContext from "../../Context/AlertContext/alertContext";
 
 const Search = () => {
     const memoryContext = useContext(MemoryContext);
-    const { filterMemory, clearFilter, filter } = memoryContext;
-
-    const alertContext = useContext(AlertContext);
-    const { setAlert } = alertContext;
+    const { filterMemory, clearFilter } = memoryContext;
 
     const [search, setSearch] = useState("");
 
@@ -17,11 +13,6 @@ const Search = () => {
         } else {
             clearFilter();
         }
-
-        if (search !== "" && filter.length === 0) {
-            setAlert("No such Title");
-        }
-
         //eslint-disable-next-line
     }, [search]);
 

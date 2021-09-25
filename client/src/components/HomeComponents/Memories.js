@@ -10,7 +10,7 @@ const Memories = ({ memory }) => {
                     //eslint-disable-next-line
                     <img
                         className="h-36 w-64 mx-auto mt-6"
-                        src={memory.photo.url}
+                        src={memory.photo.secure_url}
                         alt="description of image"
                     />
                 ) : (
